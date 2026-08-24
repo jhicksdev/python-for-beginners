@@ -1,0 +1,36 @@
+# AGENTS.md
+
+Browser-based Python tutorial. Bun workspaces monorepo: Svelte 5 + Vite client runs learner Python in-browser via Pyodide (CPython on WASM, Web Worker). Deployed as a fully static site to GitHub Pages (`jhicksdev.github.io/python-for-beginners/`) via `.github/workflows/deploy.yml` (push to `main`). The `server/` workspace exists only for local `bun run dev:server` — it is NOT deployed.
+
+## Commands
+
+Run from repo root (Bun — `bun.lock` present, use `bun` not npm):
+
+- `bun run dev` — server (:4568) + Vite client concurrently via `bun run --filter '*' dev` (Vite proxies `/api` → :4568)
+- `bun run dev:server` / `bun run dev:client` — individually (`server` uses `bun --hot`, `client` uses `vite`)
+- `bun test` — server suite only (only tests in repo); single: `bun --cwd=server test -t "<name>"` or `bun --cwd=server test index.test.ts`
+- `bun run check` — `svelte-check --tsconfig ./tsconfig.json`; the ONLY typecheck (client only). No formatter config.
+- `bun run lint` — ESLint 10 flat config (`eslint.config.mjs`) at repo root; Bun-managed deps (`eslint`, `@eslint/js`, `globals`, `typescript-eslint`). Lints `.ts`/`.js` in `client/src/`, `content/`, `server/`, `shared/` (NOT `.svelte` — that's `svelte-check`'s job). Baseline is 0 errors.
+- `bun run build` — Vite build client only → `client/dist`, `base` set to `/python-for-beginners/`; content is bundled at build time (no runtime API). `bun run start` (`NODE_ENV=production bun --cwd=server index.ts`) serves the built dist via SPA fallback (local-only utility — not deployed)
+- `bun client/scripts/verify-content.ts` — validates every exercise `solution` passes its own `check` (real Pyodide under Bun, no browser); run after editing `content/`
+- `bun client/scripts/smoke.ts` — quick runner sanity (output, assert checks, error formatting)
+
+## Structure
+
+- `content/` — 11 chapters as plain TS modules exporting `Chapter` (`shared/types.ts`); order defined in `content/index.ts`. The client imports `content/index.ts` directly at build time (bundled); it does NOT fetch from an API on the deployed site
+- `shared/` — types only; NOT a workspace package. Imported by relative path. `verbatimModuleSyntax` is on — `import type` required for `shared/types`
+- `server/` — local-dev only. `index.ts` serves `GET /api/chapters`, `GET /api/chapters/:slug`, `GET /api/health` + static `client/dist` with SPA fallback to `index.html`; `content.ts` maps `content/index.ts` to `ChapterSummary`
+- `client/src/lib/chapters.svelte.ts` — derives `ChapterSummary[]` and chapter lookups directly from the bundled `content/index.ts` at build time (no `api.ts` fetch; `api.ts` was deleted during the GitHub Pages conversion). `chapterList` is a `readable` seeded synchronously; `loadChapter(slug)` is a cached lookup wrapped in a Promise so chapter UI stays async-shaped
+- `client/src/lib/check.ts` + `runner/` (`client.ts`, `runner.worker.ts`, `harness.py.ts`, `wrap.ts`) — exercise validation entirely in browser (Web Worker), never on server. Worker calls Python harness in `harness.py.ts`: learner code runs via `exec` in a FRESH namespace per run, check expressions are `eval`ed in that namespace (pass iff result is exactly `True`), and ONE JSON blob `{ok, output, error, checks, methodChecks}` returns as a value — stdout never used for results.
+- Technique enforcement (`mustUseMethods`/`mustUseFunctions` on `Exercise`): the harness ALSO `ast.parse`s the learner source and, per required callable, records whether the source contains a REAL call node (`obj.name(...)` → method; `name(...)` → function). Comments and string literals never satisfy a requirement. `evaluateRun` gates success on these after output/assert pass; failure surfaces as `CheckOutcome.failure.kind === "method"`; `ExerciseCard` shows a "must use: …" chip (transparency) + method-check rows in `OutputPanel`. Exercises are curated — only tag ones whose prompt explicitly mandates the technique (currently `strings-2` `upper`, `strings-3` `swapcase`/`replace`, `functions-3` `lower`).
+- `UI_DESIGN.md` is the binding design spec (color tokens, type scale, motion). Style via CSS custom properties in `client/src/app.css` (`--accent`, `--speed: 160ms`, …) — don't hardcode hex/durations; azure accent is reserved for interaction moments per its usage map.
+
+## Gotchas
+
+- `client/public/vendor/pyodide/` (~13 MB) and `client/dist/` are generated, not source. `predev`/`prebuild` run `client/scripts/copy-pyodide.ts` copying `pyodide.mjs`, `pyodide.asm.mjs`, `pyodide.asm.wasm`, `python_stdlib.zip`, `pyodide-lock.json` from `node_modules/pyodide/`. Don't edit or commit. The worker imports Pyodide's loader at RUNTIME (never bundled — don't add `import "pyodide"` anywhere) and Vite refuses to serve ESM from `/public`, so the loader URL differs per environment: dev serves it from `/node_modules/pyodide/`, prod from `/vendor/pyodide/` prefixed with `import.meta.env.BASE_URL` (`/python-for-beginners/` in the build) — `import.meta.env.DEV` switch in `runner.worker.ts`. Keep that specifier runtime-computed (`.join("/")` template) — a plain constant string gets statically resolved by Vite and rejected. The base-path template uses an array join so it can't be statically inlined either.
+- Tests boot the real server on **4598** (`server/index.test.ts`); that port must be free. That test hardcodes content shape: exactly 11 chapters, first slug `hello-python`, last `capstone`. Adding/removing/reordering chapters requires updating `content/index.ts` and the test.
+- `server/` and `content/` are not covered by any typecheck. `check` = `svelte-check` client only (`client/tsconfig.json` includes `../shared/**/*.ts` but not `server/`). Node-side scripts import TS directly (`harness.py.ts`, `wrap.ts`) — keep them dependency-light so Bun can run them as-is.
+- `bun run check` baseline is 0 errors and 4 warnings: all `state_referenced_locally` in `ExampleBlock.svelte`/`ExerciseCard.svelte` (intentional `$state` from props).
+- `bun run lint` baseline is 0 errors. `eslint.config.mjs` runs `typescript-eslint` recommended + `@eslint/js` recommended. Core `prefer-const` is disabled: it false-positives on Svelte `$state` bindings (must stay `let` for reactivity) and Bun's deferred module init (`runner.worker.ts` `let pyodideReady` is assigned later). `globalIgnores` excludes `dist/`, `public/`, `node_modules/`.
+- `client/vite.config.ts` proxies `/api` → `localhost:4568` (dev only), sets `worker.format: "es"` (required for the ESM worker), and switches `base` per command: `/python-for-beginners/` for `build`, `/` for dev. `server/index.ts` `PORT` defaults to 4568 via `process.env.PORT`.
+- Check expressions must evaluate to exactly `True` (e.g. comparisons, `isinstance(...)`); existence checks use `"name" in vars()`. Statement-style logic is not allowed inside `expr` — use the lambda/tuple idiom for multi-step instance checks (see `ch10-classes.ts` `classes-2`: `(lambda c1: (c1.increment(), c1.increment(), c1.value)[2])(Counter()) == 2`).

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+client/public/vendor/
+.DS_Store
+*.log
+.vite/
+
+# Bun transpiles each .ts into a sibling .js when it runs server/content/shared —
+# those droppings are generated, never source. Keep the TS-only dirs clean.
+server/*.js
+content/*.js
+shared/*.js

@@ -1,0 +1,106 @@
+:root {
+  --bg: #FFFBF2;
+  --surface: #FFFFFF;
+  --surface-2: #F3EAE0;
+  --border: #E7D8C4;
+  --border-strong: #C9B7A3;
+
+  --ink: #1F1A1C;
+  --ink-2: #5B5351;
+  --ink-3: #958A86;
+
+  --accent: #1D63B8;
+  --accent-deep: #164C87;
+  --accent-tint: #E1EDFB;
+
+  --green: #0F766E;
+  --green-tint: #ECFDF5;
+  --amber: #92400E;
+  --amber-tint: #FFFBEB;
+
+  --code-bg: #FFF8F0;
+  --code-border: #E7D8C4;
+
+  --tok-keyword: #1D63B8;
+  --tok-string: #0F766E;
+  --tok-number: #9A3412;
+  --tok-constant: #6D28D9;
+  --tok-comment: #A69E9A;
+  --tok-method: #A16207;
+  --tok-punct: #78716C;
+  --tok-variable: #1F1A1C;
+
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --header-h: 56px;
+  --sidebar-w: 292px;
+  --radius: 14px;
+  --radius-sm: 9px;
+  --speed: 160ms;
+}
+
+:root[data-theme="dark"] {
+  --bg: #12141A;
+  --surface: #191C24;
+  --surface-2: #20232C;
+  --border: #272B35;
+  --border-strong: #3A3F4C;
+
+  --ink: #EDF2FC;
+  --ink-2: #C3CBDA;
+  --ink-3: #8B93A4;
+
+  --accent: #7CB7EE;
+  --accent-deep: #A6CCF4;
+  --accent-tint: #14212F;
+
+  --green: #34D399;
+  --green-tint: #0B1E19;
+  --amber: #FBBF24;
+  --amber-tint: #211A0E;
+
+  --code-bg: #16181F;
+  --code-border: #272B35;
+
+  --tok-keyword: #7CB7EE;
+  --tok-string: #6EE7B7;
+  --tok-number: #FDBA74;
+  --tok-constant: #C4B5FD;
+  --tok-comment: #80889B;
+  --tok-method: #FBBF24;
+  --tok-punct: #A8A29E;
+  --tok-variable: #EDF2FC;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--speed) ease, color var(--speed) ease;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+::selection { background: var(--accent-tint); }
+.cm-cursor-dark { caret-color: #FFFFFF; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

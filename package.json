@@ -1,0 +1,21 @@
+{
+  "name": "python-tutorial",
+  "private": true,
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "dev:server": "bun --cwd=server run dev",
+    "dev:client": "bun --cwd=client run dev",
+    "build": "bun --cwd=client run build",
+    "start": "bun --cwd=server run start",
+    "test": "bun --cwd=server run test",
+    "check": "bun --cwd=client run check",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.9.1",
+    "globals": "^17.11.0",
+    "typescript-eslint": "^8.68.0"
+  }
+}

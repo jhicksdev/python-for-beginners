@@ -33,7 +33,7 @@
 
 <section class="example">
   <div class="tag-row">
-    <span class="comment-tag"># try it</span>
+    <span class="comment-tag">try it</span>
     {#if block.title}<span class="title">{block.title}</span>{/if}
     <button class="ghost" type="button" onclick={reset} disabled={code === initialCode}>reset</button>
   </div>
@@ -65,11 +65,11 @@
 <style>
   .example {
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 0;
     background: var(--surface);
     overflow: hidden;
     margin: 24px 0;
-    box-shadow: 0 1px 2px rgba(24, 28, 38, 0.04);
+    box-shadow: none;
   }
   .tag-row {
     display: flex;
@@ -77,7 +77,7 @@
     gap: 12px;
     padding: 10px 14px;
     border-bottom: 1px solid var(--code-border);
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    background: var(--surface-2);
   }
   .comment-tag {
     font-family: var(--font-mono);
@@ -107,8 +107,8 @@
     color: var(--ink-3);
     cursor: pointer;
     padding: 4px 10px;
-    border-radius: 999px;
-    transition: all var(--speed) ease;
+    border-radius: 0;
+    transition: color var(--speed) ease, background var(--speed) ease, border-color var(--speed) ease;
   }
   .ghost:hover:not(:disabled) {
     color: var(--ink);
@@ -153,11 +153,11 @@
     background: var(--accent-tint);
     color: var(--accent-deep);
     cursor: pointer;
-    transition: all var(--speed) ease;
+    transition: color var(--speed) ease, background var(--speed) ease, border-color var(--speed) ease;
   }
   .run:hover:not(:disabled) {
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     border-color: var(--accent);
   }
   .run:disabled { opacity: 0.55; cursor: default; }

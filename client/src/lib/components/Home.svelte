@@ -51,10 +51,10 @@
 <div class="home">
   <div class="hero">
     <div class="hero-copy">
-      <span class="comment-tag"># welcome — &gt;&gt;&gt;</span>
+      <span class="comment-tag">welcome &gt;&gt;&gt;</span>
       <h1>Learn Python,<br /><span class="accent-word">one small win</span> at a time.</h1>
       <p class="lede">
-        Real Python runs right in your browser — no setup, no installs.
+        Real Python runs right in your browser. No setup, no installs.
         Read a little, write a little, and watch the computer do what you told it to.
       </p>
       <div class="cta-row">
@@ -78,11 +78,6 @@
     </div>
 
     <div class="hero-repl">
-      <div class="repl-chrome">
-        <span class="chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="chrome-title">python — 3.14</span>
-        <span class="chrome-tag">live</span>
-      </div>
       <div class="repl-editor">
         <CodeEditor bind:value={heroCode} onsubmit={runHero} />
       </div>
@@ -99,16 +94,16 @@
           {#if heroResult.output.trim()}
             <pre>{heroResult.output}</pre>
           {:else if heroResult.ok}
-            <pre class="muted">(no output — try a print)</pre>
+            <pre class="muted">(no output. Try a print)</pre>
           {/if}
           {#if heroResult.error}
             <pre class="err">{heroResult.error}</pre>
           {/if}
         {:else}
-          <pre class="muted">Click Run to see what Python prints —</pre>
+          <pre class="muted">Click Run to see what Python prints.</pre>
         {/if}
       </div>
-      <div class="repl-watermark" aria-hidden="true">&gt;&gt;&gt;</div>
+      <div class="repl-watermark" aria-hidden="true">py</div>
     </div>
   </div>
 
@@ -116,7 +111,7 @@
     <div class="section-head">
       <span class="eyebrow">the path</span>
       <span class="eyebrow-line"></span>
-      <span class="eyebrow count">{summaries.length} chapters — in order</span>
+      <span class="eyebrow count">{summaries.length} chapters, in order</span>
     </div>
     <ol class="preview">
       {#each summaries as s (s.slug)}
@@ -144,15 +139,15 @@
   .home {
     max-width: 1080px;
     width: 100%;
-    padding-top: clamp(28px, 5vh, 56px);
+    padding-top: clamp(28px, 6vh, 72px);
   }
   .hero {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
     gap: clamp(24px, 4vw, 48px);
     align-items: start;
-    padding-bottom: 42px;
-    border-bottom: 1px solid var(--border);
+    padding-bottom: 52px;
+    border-bottom: 1px solid var(--border-strong);
   }
   .comment-tag {
     font-family: var(--font-mono);
@@ -171,14 +166,17 @@
     font-size: clamp(40px, 6.2vw, 62px);
     font-weight: 650;
     letter-spacing: -0.032em;
-    line-height: 0.95;
+    line-height: 1;
     margin: 14px 0 16px;
   }
   .accent-word {
-    font-style: italic;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--accent);
     letter-spacing: -0.03em;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.14em;
   }
   .lede {
     font-size: 17.5px;
@@ -200,7 +198,7 @@
     font-size: 15px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: #fff;
+    color: var(--on-accent);
     background: var(--accent);
     border: 1px solid var(--accent);
     padding: 12px 22px;
@@ -266,44 +264,10 @@
   .hero-repl {
     position: relative;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-radius: 0;
     background: var(--surface);
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(24, 28, 38, 0.08), 0 1px 3px rgba(24, 28, 38, 0.06);
-  }
-  .repl-chrome {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
-  }
-  .chrome-dots { display: flex; gap: 6px; }
-  .chrome-dots i {
-    width: 9px; height: 9px; border-radius: 50%; display: block;
-  }
-  .chrome-dots i:nth-child(1){background:#FF5F56; border:1px solid #E0443E}
-  .chrome-dots i:nth-child(2){background:#FFBD2E; border:1px solid #DEA123}
-  .chrome-dots i:nth-child(3){background:#27C93F; border:1px solid #1AAB29}
-  :global([data-theme="dark"]) .chrome-dots i{opacity:0.9}
-  .chrome-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.02em;
-  }
-  .chrome-tag {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-tint);
-    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-    padding: 2px 7px;
-    border-radius: 999px;
+    box-shadow: 8px 8px 0 var(--surface-2);
   }
   .repl-editor {
     background: var(--code-bg);
@@ -341,9 +305,9 @@
     border-radius: 999px;
     border: 1px solid var(--accent);
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     cursor: pointer;
-    transition: all var(--speed) ease;
+    transition: transform var(--speed) var(--ease-out), background var(--speed) var(--ease-out), border-color var(--speed) var(--ease-out);
   }
   .repl-run:hover:not(:disabled){ background: var(--accent-deep); border-color: var(--accent-deep); }
   .repl-run:disabled{ opacity:0.5; cursor: default;}
@@ -363,7 +327,7 @@
   }
   .repl-output pre{ margin:0; white-space: pre-wrap; }
   .repl-output .muted{ color: var(--ink-3); font-style: italic; }
-  .repl-output .err{ color: var(--accent-deep); margin-top: 6px; }
+  .repl-output .err{ color: var(--error); margin-top: 6px; }
   .repl-spin{
     width:10px; height:10px; border-radius:50%; border:2px solid var(--accent-tint); border-top-color: var(--accent);
     display:inline-block; animation: spin 700ms linear infinite; vertical-align: middle;
@@ -378,16 +342,16 @@
     line-height: 1;
     color: var(--accent);
     opacity: 0.06;
-    font-style: italic;
     pointer-events: none;
     user-select: none;
   }
 
   .section-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 14px;
-    margin: 38px 0 18px;
+    margin: 56px 0 18px;
   }
   .eyebrow{
     font-family: var(--font-mono);
@@ -405,7 +369,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 0;
     overflow: hidden;
     background: var(--surface);
   }
@@ -418,10 +382,10 @@
     text-decoration: none;
     color: var(--ink);
     padding: 14px 14px 14px 12px;
-    transition: background var(--speed) ease;
+    transition: background var(--speed) ease, padding var(--speed) ease;
     position: relative;
   }
-  .preview a:hover { background: var(--surface-2); }
+  .preview a:hover { background: var(--surface-2); padding-left: 18px; }
   .preview a.done .facet{ background: var(--accent); box-shadow: 0 0 0 4px var(--accent-tint); }
   .n {
     font-family: var(--font-mono);
@@ -463,10 +427,13 @@
     .repl-watermark{ font-size: 72px; }
   }
   @media (max-width: 560px) {
+    .section-head { grid-template-columns: 1fr; gap: 6px; }
+    .eyebrow-line { width: 48px; }
     .preview a {
       grid-template-columns: 30px 12px 1fr auto;
       padding: 12px 10px;
     }
+    .preview a:hover { padding-left: 14px; }
     em{ display: none; }
     .arrow{ display:none; }
   }

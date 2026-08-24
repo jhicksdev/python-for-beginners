@@ -20,7 +20,7 @@ snacks = 3
 
 print(f"Hi, {name}! You have {snacks} snacks.")
 print(f"In five years you'll have {snacks * 12} snack-related memories.")`,
-      note: "Everything inside {} is real Python. Math, function calls, other strings — anything goes. Note: the f prefix is required. Without it, {} prints literally.",
+      note: "Everything inside {} is real Python. Math, function calls, other strings, anything goes. Note: the f prefix is required. Without it, {} prints literally.",
     },
     {
       type: "prose",
@@ -30,9 +30,9 @@ print(f"In five years you'll have {snacks * 12} snack-related memories.")`,
 "Hi, " + name + "! You have " + str(snacks) + " snacks."
 \`\`\`
 
-(That \`str(...)\` means "**str**ing" — \`+\` refuses to mix text and numbers without it.)
+(That \`str(...)\` means "**str**ing"; \`+\` refuses to mix text and numbers without it.)
 
-F-strings are almost always the cleaner choice. Now meet some classic string *methods* — actions strings know how to perform on themselves.`,
+F-strings are almost always the cleaner choice. Now meet some classic string *methods*, the actions strings know how to perform on themselves.`,
     },
     {
       type: "example",
@@ -43,16 +43,16 @@ print(word.upper())
 print(word.capitalize())
 print(len(word))
 print(word * 3)`,
-      note: "word * 3 repeats the string three times. Python doesn't stop you from having fun. And len() counts characters — note it's a function, not word.length.",
+      note: "word * 3 repeats the string three times. Python doesn't stop you from having fun. And len() counts characters. Note it's a function, not word.length.",
     },
     {
       type: "prose",
       md: `Two more everyday moves:
 
-- \`.strip()\` removes stray spaces from both ends — lifesaver when cleaning input.
+- \`.strip()\` removes stray spaces from both ends, a lifesaver when cleaning input.
 - \`"x" in word\` answers whether the string contains something, giving you \`True\` or \`False\`.
 
-Methods chain nicely, too: \`"  python ".strip().upper()\` gives \`"PYTHON"\`. Read chains left to right — each step transforms the result of the previous one.`,
+Methods chain nicely, too: \`"  python ".strip().upper()\` gives \`"PYTHON"\`. Read chains left to right; each step transforms the result of the previous one.`,
     },
     {
       type: "example",
@@ -107,15 +107,15 @@ print(chant * 2 + team.upper() + "!")`,
       id: "strings-3",
       title: "String lab",
       prompt:
-        'Using the given `secret` string, make the program print exactly:\n\n```\n12\nsTAY cURIOUS\nSt?y C?r???s\n```\n\nLine 1 is its length. Line 2: the **swapcase** version (lower becomes upper and vice versa). Line 3: every vowel replaced with `"?"` — chain `.replace()` calls, one per vowel.',
+        'Using the given `secret` string, make the program print exactly:\n\n```\n12\nsTAY cURIOUS\nSt?y C?r???s\n```\n\nLine 1 is its length. Line 2: the **swapcase** version (lower becomes upper and vice versa). Line 3: every vowel replaced with `"?"`. Chain `.replace()` calls, one per vowel.',
       starter: `secret = "Stay Curious"
 
 # Line 1: its length
 # Line 2: swapcase version
-# Line 3: vowels replaced with "?" — chain .replace() calls
+# Line 3: vowels replaced with "?". Chain .replace() calls
 `,
       check: { kind: "output", expect: "12\nsTAY cURIOUS\nSt?y C?r???s" },
-      hint: "Line 1: len(secret). Line 2: secret.swapcase(). Line 3: replace a, e, i, o and u one at a time — each .replace() feeds the next.",
+      hint: "Line 1: len(secret). Line 2: secret.swapcase(). Line 3: replace a, e, i, o and u one at a time; each .replace() feeds the next.",
       mustUseMethods: ["swapcase", "replace"],
       solution: `secret = "Stay Curious"
 
@@ -127,7 +127,7 @@ print(secret.replace("a", "?").replace("e", "?").replace("i", "?").replace("o", 
       type: "prose",
       md: `You now handle text like a pro: interpolate with f-strings, transform, chain, ask questions.
 
-Next: numbers — including one division surprise that trips up every newcomer.`,
+Next: numbers, including one division surprise that trips up every newcomer.`,
     },
   ],
 };

@@ -78,7 +78,7 @@
   <header>
     <span class="cell" class:on={solved} aria-hidden="true"></span>
     <div class="heading">
-      <span class="comment-tag"># your turn — python</span>
+      <span class="comment-tag">your turn, python</span>
       <h3>{exercise.title}</h3>
       {#if mustUse.length > 0}
         <span class="must-chip" title="Your code must call these">
@@ -163,7 +163,7 @@
       {:else if outcome.failure.kind === "method"}
         <span class="method-msg">{outcome.failure.message}</span>
       {:else}
-        Not there yet — adjust your code and run again.
+        Not there yet. Adjust your code and run again.
       {/if}
     </p>
   {/if}
@@ -172,10 +172,10 @@
 <style>
   .exercise {
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    border-radius: 0;
     background: var(--surface);
     overflow: hidden;
-    margin: 26px 0;
+    margin: 36px 0;
   }
   .exercise.solved:not(:has(.panel.error)) {
     border-color: color-mix(in srgb, var(--green) 35%, var(--border));
@@ -214,7 +214,7 @@
     background: var(--accent-tint);
     border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
     padding: 2px 8px;
-    border-radius: 999px;
+    border-radius: 2px;
     white-space: nowrap;
   }
   .comment-tag {
@@ -229,7 +229,7 @@
   }
   h3 {
     margin: 2px 0 0;
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-weight: 600;
     font-size: 19px;
     letter-spacing: -0.01em;
@@ -242,7 +242,7 @@
     color: var(--green);
     border: 1px solid color-mix(in srgb, var(--green) 40%, transparent);
     padding: 3px 9px;
-    border-radius: 99px;
+    border-radius: 2px;
     background: var(--green-tint);
   }
   .prompt {
@@ -298,9 +298,9 @@
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 7px 15px;
-    border-radius: 999px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: all var(--speed) ease;
+    transition: color var(--speed) ease, background var(--speed) ease, border-color var(--speed) ease;
   }
   button.primary {
     display: inline-flex;
@@ -308,16 +308,12 @@
     gap: 8px;
     border: 1px solid var(--accent);
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     box-shadow: 0 1px 4px color-mix(in srgb, var(--accent) 18%, transparent);
   }
   button.primary:hover:not(:disabled) {
     background: var(--accent-deep);
     border-color: var(--accent-deep);
-  }
-  :global([data-theme="dark"]) button.primary:hover:not(:disabled) {
-    background: var(--accent-deep);
-    color: #fff;
   }
   button.primary:disabled {
     opacity: 0.55;
@@ -329,7 +325,7 @@
   }
   button.secondary {
     border: 1px solid var(--border-strong);
-    background: var(--surface);
+    background: transparent;
     color: var(--ink-2);
   }
   button.secondary:hover {
@@ -362,7 +358,7 @@
   .solution pre {
     background: var(--code-bg);
     border: 1px solid var(--code-border);
-    border-radius: 8px;
+    border-radius: 0;
     padding: 12px 14px;
     font-family: var(--font-mono);
     font-size: 12.5px;
@@ -390,6 +386,6 @@
   }
   .method-msg {
     white-space: pre-line;
-    color: var(--accent-deep);
+    color: var(--error);
   }
 </style>

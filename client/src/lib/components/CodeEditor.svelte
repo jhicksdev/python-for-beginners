@@ -42,13 +42,8 @@
     },
     ".cm-content": {
       fontFamily: "var(--font-mono)",
-      caretColor: "#FFFFFF",
+       caretColor: "var(--ink)",
       paddingBottom: "10px",
-    },
-    "@media (prefers-color-scheme: dark)": {
-      ".cm-content": {
-        caretColor: "#FFFFFF",
-      },
     },
     ".cm-line": {
       padding: "0 14px",

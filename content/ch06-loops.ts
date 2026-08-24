@@ -8,7 +8,7 @@ const chapter: Chapter = {
   blocks: [
     {
       type: "prose",
-      md: `Computers never get bored — that's their superpower and ours to exploit. Need something done ten times? You write the instruction *once*.
+      md: `Computers never get bored, and that's their superpower and ours to exploit. Need something done ten times? You write the instruction *once*.
 
 Python's friendliest loop walks through a **range** of numbers:
 
@@ -17,7 +17,7 @@ for i in range(3):
     print("Echo!")
 \`\`\`
 
-\`range(3)\` produces 0, 1, 2 — three turns. The \`for\` line ends in a colon, and the indented block below is the loop body.`,
+\`range(3)\` produces 0, 1, 2, three turns. The \`for\` line ends in a colon, and the indented block below is the loop body.`,
     },
     {
       type: "example",
@@ -33,9 +33,9 @@ for i in range(5):
       type: "prose",
       md: `\`range\` is more flexible than it looks:
 
-- \`range(5)\` — 0 up to (but not including) 5
-- \`range(1, 6)\` — 1 through 5
-- \`range(0, 10, 2)\` — even numbers: 0, 2, 4, 6, 8
+- \`range(5)\`: 0 up to (but not including) 5
+- \`range(1, 6)\`: 1 through 5
+- \`range(0, 10, 2)\`: even numbers: 0, 2, 4, 6, 8
 
 And when you need to keep going until a condition flips, there's \`while\`:`,
     },
@@ -49,14 +49,14 @@ while fuel > 0:
     fuel = fuel - 1
 
 print("Liftoff!")`,
-      note: "The loop re-checks fuel > 0 before every pass. Forgetting to change fuel inside the loop means it never becomes False — the infamous infinite loop. (Our playground will stop you after a few seconds, so don't worry.)",
+      note: "The loop re-checks fuel > 0 before every pass. Forgetting to change fuel inside the loop means it never becomes False; that's the infamous infinite loop. (Our playground will stop you after a few seconds, so don't worry.)",
     },
     {
       type: "prose",
       md: `Two escape hatches for loops:
 
-- \`break\` — leave the loop immediately.
-- \`continue\` — skip to the next turn.
+- \`break\`: leave the loop immediately.
+- \`continue\`: skip to the next turn.
 
 Also worth meeting early: \`+=\` shorthand. \`fuel -= 1\` means \`fuel = fuel - 1\`; \`count += 1\` adds one. Programmers are professionally lazy.`,
     },
@@ -80,7 +80,7 @@ Also worth meeting early: \`+=\` shorthand. \`fuel -= 1\` means \`fuel = fuel - 
       starter: `# range can count down if you give it a negative step: range(5, ?, ?)
 `,
       check: { kind: "output", expect: "5\n4\n3\n2\n1\nLiftoff!" },
-      hint: "range(5, 0, -1) counts 5, 4, 3, 2, 1 — start at 5, stop before 0, step by -1.",
+      hint: "range(5, 0, -1) counts 5, 4, 3, 2, 1; start at 5, stop before 0, step by -1.",
       solution: `for n in range(5, 0, -1):
     print(n)
 print("Liftoff!")`,
@@ -120,7 +120,7 @@ print(f"The total is {total}")`,
     },
     {
       type: "prose",
-      md: `Loops + decisions + variables already make you dangerous. Next chapter: lists — how to handle a *collection* of things without inventing fifty variable names.`,
+      md: `Loops + decisions + variables already make you dangerous. Next chapter: lists, how to handle a *collection* of things without inventing fifty variable names.`,
     },
   ],
 };

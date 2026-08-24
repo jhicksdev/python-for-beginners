@@ -26,6 +26,20 @@ Deployed as a fully static site to GitHub Pages on every push to `main` (see
 - **Progress saved in the browser** (`localStorage`) — nothing leaves your
   machine.
 
+## Interface
+
+The client is an editorial workbench rather than a generic dashboard. It uses
+warm paper tones, a restrained interpreter-blue accent, Fraunces for display
+headings, Space Grotesk for interface text, and IBM Plex Mono for code and
+utility text. The home page opens with a runnable Python editor, followed by a
+numbered chapter index. Lesson pages keep the reading column narrow and put
+examples and exercises directly in the learning flow.
+
+The visual system lives in `client/src/tokens.css`; the root `tokens.css` file
+is a portable import entrypoint. `UI_DESIGN.md` documents the design decisions,
+responsive behavior, interaction states, and anti-slop constraints for future
+UI work.
+
 ## Requirements
 
 - [Bun](https://bun.sh) (this is a Bun workspace; `bun.lock` is the lockfile)

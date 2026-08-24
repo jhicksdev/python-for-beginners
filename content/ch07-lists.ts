@@ -14,7 +14,7 @@ const chapter: Chapter = {
 planets = ["Mercury", "Venus", "Earth", "Mars"]
 \`\`\`
 
-Each item sits at a numbered position called an **index** — and here's the big one: **counting starts at 0**. The first item is \`planets[0]\`, the second is \`planets[1]\`. Every programmer has been burned by this. You'll get used to it faster than we did.`,
+Each item sits at a numbered position called an **index**, and here's the big one: **counting starts at 0**. The first item is \`planets[0]\`, the second is \`planets[1]\`. Every programmer has been burned by this. You'll get used to it faster than we did.`,
     },
     {
       type: "example",
@@ -28,7 +28,7 @@ print(planets[-1])
 print(len(planets))
 print(planets[0])
 print(planets[-1])`,
-      note: "Negative indexes count from the end — [-1] is the last item. len() counts items (4, not 3!).",
+      note: "Negative indexes count from the end; [-1] is the last item. len() counts items (4, not 3!).",
     },
     {
       type: "prose",
@@ -39,7 +39,7 @@ print(planets[-1])`,
 - \`.remove(item)\` removes a specific item
 - \`item in my_list\` asks if something's in there
 
-And lists loop beautifully with \`for\` — no index bookkeeping needed.`,
+And lists loop beautifully with \`for\`, no index bookkeeping needed.`,
     },
     {
       type: "example",
@@ -52,14 +52,14 @@ for task in todo:
     print(f"- {task}")
 
 print(f"{len(todo)} things to do")`,
-      note: "for hands you one item per pass. This pattern — loop over a collection, do something with each item — is half of all programming.",
+      note: "for hands you one item per pass. This pattern, loop over a collection and do something with each item, is half of all programming.",
     },
     {
       type: "prose",
       md: `Quick answers about a whole list:
 
 - \`sum(numbers)\`, \`max(numbers)\`, \`min(numbers)\`, \`sorted(numbers)\`
-- \`.count(item)\` — how many times does it appear?
+- \`.count(item)\`: how many times does it appear?
 
 One more tool you'll need constantly: **\`.join\`** stitches list items into ONE string. It's a string method that takes the list, and everything must be text first:
 
@@ -135,7 +135,7 @@ for item in basket:
         kind: "output",
         expect: "Total: 405\nBest: 91\nPassing: 88, 91, 80, 91\nSorted low to high: 55, 80, 88, 91, 91",
       },
-      hint: 'Passing needs ", ".join(str(s) for s in scores if s > 70) — an if can ride along inside the join. Sorting ascending is plain sorted(scores).',
+      hint: 'Passing needs ", ".join(str(s) for s in scores if s > 70); an if can ride along inside the join. Sorting ascending is plain sorted(scores).',
       solution: `scores = [88, 55, 91, 80, 91]
 
 print(f"Total: {sum(scores)}")
@@ -145,7 +145,7 @@ print(f'Sorted low to high: {", ".join(str(s) for s in sorted(scores))}')`,
     },
     {
       type: "prose",
-      md: `Lists handle *ordered collections of things*. But often you want to attach labels to values — a name paired with an age, a word paired with a definition. That's a job for dictionaries, next chapter.`,
+      md: `Lists handle *ordered collections of things*. But often you want to attach labels to values, a name paired with an age, a word paired with a definition. That's a job for dictionaries, next chapter.`,
     },
   ],
 };

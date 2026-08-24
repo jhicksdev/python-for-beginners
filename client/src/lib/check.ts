@@ -48,7 +48,7 @@ export function evaluateRun(exercise: Exercise, result: RunResult): CheckOutcome
         kind: "output",
         message:
           check.mode === "regex"
-            ? "Not quite — your output didn't have the form we asked for."
+            ? "Not quite. Your output didn't have the form we asked for."
             : "That's not the exact output this exercise asks for.",
         expected: expectedForDisplay,
         got: result.output,
@@ -62,7 +62,7 @@ export function evaluateRun(exercise: Exercise, result: RunResult): CheckOutcome
     if (failed.length === 0 && checks.length > 0) return assertMethodOutcome(exercise, result);
 
     const lines = failed.map((c) =>
-      c.error ? `${c.name} — ${c.error}` : `${c.name}${c.got !== undefined ? ` (got ${c.got})` : ""}`,
+      c.error ? `${c.name}: ${c.error}` : `${c.name}${c.got !== undefined ? ` (got ${c.got})` : ""}`,
     );
     const hint = check.failHint ? `\n\n${check.failHint}` : "";
     return {
@@ -71,7 +71,7 @@ export function evaluateRun(exercise: Exercise, result: RunResult): CheckOutcome
         kind: "assert",
         message: failed.length === checks.length && checks.length > 0
           ? `None of the checks passed.${hint}`
-          : `Not quite — ${checks.length - failed.length} of ${checks.length} checks passed.${hint}`,
+          : `Not quite. ${checks.length - failed.length} of ${checks.length} checks passed.${hint}`,
         expected: lines.join("\n"),
       },
     };

@@ -1,0 +1,66 @@
+/* Hallmark · theme: Almanac · axes: light / roman-serif / cool-blue
+ * Workbench redesign: editorial restraint, fewer containers, clearer action hierarchy.
+ */
+:root {
+  --color-paper: oklch(98% 0.012 80);
+  --color-paper-2: oklch(95% 0.018 78);
+  --color-paper-3: oklch(92% 0.022 76);
+  --color-rule: oklch(86% 0.018 76);
+  --color-rule-strong: oklch(74% 0.022 72);
+  --color-ink: oklch(23% 0.018 340);
+  --color-ink-2: oklch(46% 0.018 45);
+  --color-ink-3: oklch(63% 0.014 45);
+  --color-accent: oklch(48% 0.16 255);
+  --color-accent-deep: oklch(37% 0.14 255);
+  --color-accent-tint: oklch(93% 0.035 255);
+  --color-positive: oklch(46% 0.12 170);
+  --color-positive-tint: oklch(94% 0.035 170);
+  --color-warning: oklch(47% 0.12 65);
+  --color-warning-tint: oklch(95% 0.035 80);
+  --color-error: oklch(48% 0.15 28);
+  --color-error-tint: oklch(94% 0.035 28);
+  --color-on-accent: oklch(98% 0.01 255);
+  --color-code: oklch(97% 0.012 75);
+  --color-token-number: oklch(55% 0.14 45);
+  --color-token-constant: oklch(52% 0.13 295);
+  --shadow-card: 0 12px 32px oklch(25% 0.02 70 / 0.08), 0 1px 2px oklch(25% 0.02 70 / 0.08);
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --radius: 4px;
+  --radius-sm: 3px;
+  --speed: 160ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+:root[data-theme="dark"] {
+  --color-paper: oklch(16% 0.016 255);
+  --color-paper-2: oklch(20% 0.018 255);
+  --color-paper-3: oklch(24% 0.02 255);
+  --color-rule: oklch(29% 0.02 255);
+  --color-rule-strong: oklch(40% 0.022 255);
+  --color-ink: oklch(94% 0.012 255);
+  --color-ink-2: oklch(77% 0.018 255);
+  --color-ink-3: oklch(61% 0.018 255);
+  --color-accent: oklch(72% 0.12 255);
+  --color-accent-deep: oklch(82% 0.09 255);
+  --color-accent-tint: oklch(25% 0.045 255);
+  --color-positive: oklch(74% 0.12 170);
+  --color-positive-tint: oklch(24% 0.04 170);
+  --color-warning: oklch(79% 0.13 80);
+  --color-warning-tint: oklch(25% 0.04 80);
+  --color-error: oklch(75% 0.13 28);
+  --color-error-tint: oklch(25% 0.045 28);
+  --color-on-accent: oklch(18% 0.018 255);
+  --color-code: oklch(18% 0.018 255);
+  --color-token-number: oklch(72% 0.12 55);
+  --color-token-constant: oklch(75% 0.1 295);
+  --shadow-card: 0 16px 40px oklch(5% 0.02 255 / 0.34), 0 1px 2px oklch(5% 0.02 255 / 0.3);
+}

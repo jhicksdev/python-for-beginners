@@ -8,7 +8,7 @@ const chapter: Chapter = {
   blocks: [
     {
       type: "prose",
-      md: `You've been *calling* functions since line one — \`print\`, \`len\`, \`type\`. Now you'll write your own.
+      md: `You've been *calling* functions since line one, \`print\`, \`len\`, \`type\`. Now you'll write your own.
 
 A **function** wraps a chunk of behavior behind a name, optionally taking inputs (**parameters**) and handing back an output (**return value**):
 
@@ -22,7 +22,7 @@ print(greet("Sam"))
 Two things beginners find surprising:
 
 1. \`def\` defines the function; nothing runs until you call it.
-2. Python does **not** return the last line automatically — you must say \`return\` explicitly. Forget it and your function quietly hands back \`None\`.`,
+2. Python does **not** return the last line automatically; you must say \`return\` explicitly. Forget it and your function quietly hands back \`None\`.`,
     },
     {
       type: "example",
@@ -58,7 +58,7 @@ def is_teenager(age):
 
 print(is_teenager(15))
 print(is_teenager(30))`,
-      note: "Reads like English: if is_teenager(age) — you'll write lines like that constantly from now on.",
+      note: "Reads like English: if is_teenager(age); you'll write lines like that constantly from now on.",
     },
     {
       type: "prose",
@@ -66,7 +66,7 @@ print(is_teenager(30))`,
 
 - **Reuse**: write once, call anywhere.
 - **Naming**: \`total_price(cart)\` documents itself.
-- **Testing**: you can check a function's answers directly — which is exactly how this chapter's exercises will grade you!
+- **Testing**: you can check a function's answers directly, which is exactly how this chapter's exercises will grade you!
 
 Scope note: variables created *inside* a function belong to that function alone. Information goes in through parameters and comes out through the return value.`,
     },
@@ -87,7 +87,7 @@ Scope note: variables created *inside* a function belong to that function alone.
           { name: "add works with other numbers too", expr: "add(-3, 3) == 0" },
         ],
         failHint:
-          "def add(a, b):\n    return a + b\n— Python needs the explicit return.",
+          "def add(a, b):\n    return a + b\nPython needs the explicit return.",
       },
       hint: "Each function is two lines: def name(params): and a return statement.",
       solution: `def add(a, b):
@@ -116,7 +116,7 @@ print(multiply(5, 7))`,
           { name: 'greet("Ada", "Howdy")', expr: 'greet("Ada", "Howdy") == "Howdy, Ada!"' },
           { name: 'greet("Bo", "Yo")', expr: 'greet("Bo", "Yo") == "Yo, Bo!"' },
         ],
-        failHint: 'def greet(name, greeting="Hello"): — the default kicks in when the caller skips it.',
+        failHint: 'def greet(name, greeting="Hello"): the default kicks in when the caller skips it.',
       },
       hint: 'One f-string inside the function covers both cases: f"{greeting}, {name}!"',
       solution: `def greet(name, greeting="Hello"):
@@ -143,7 +143,7 @@ print(greet("Ada", "Howdy"))`,
         failHint:
           "lower() first so \"Racecar\" matches case-insensitively, then compare to text[::-1] (the backwards slice).",
       },
-      hint: "clean = text.lower(), then return clean == clean[::-1] — the comparison already evaluates to True or False.",
+      hint: "clean = text.lower(), then return clean == clean[::-1]; the comparison already evaluates to True or False.",
       mustUseMethods: ["lower"],
       solution: `def palindrome(text):
     clean = text.lower()
@@ -156,7 +156,7 @@ print(f"ruby? {palindrome('ruby')}")`,
     },
     {
       type: "prose",
-      md: `Functions organize *behavior*. But what about bundling behavior together with the data it belongs to — a dog knowing how to bark, a bank account knowing its own balance? That idea changes everything. Classes are next.`,
+      md: `Functions organize *behavior*. But what about bundling behavior together with the data it belongs to, a dog knowing how to bark, a bank account knowing its own balance? That idea changes everything. Classes are next.`,
     },
   ],
 };

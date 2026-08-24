@@ -10,7 +10,7 @@ const chapter: Chapter = {
       type: "prose",
       md: `A **variable** is a name that points at a value. Think of it as a labelled box: you put something in, and later you use the label to get it back.
 
-Creating one is blissfully simple in Python — no types to declare, no ceremony. Just \`name = value\`.`,
+Creating one is blissfully simple in Python. No types to declare, no ceremony. Just \`name = value\`.`,
     },
     {
       type: "example",
@@ -25,11 +25,11 @@ print(age)`,
       type: "prose",
       md: `Variables can hold different *types* of values:
 
-- **String** — text in quotes: \`"hello"\`
-- **Integer** — whole numbers: \`42\`
-- **Float** — decimal numbers: \`3.14\`
-- **Boolean** — \`True\` or \`False\` (capitalized!)
-- **None** — "nothing here" (Python's version of empty)
+- **String**, text in quotes: \`"hello"\`
+- **Integer**, whole numbers: \`42\`
+- **Float**, decimal numbers: \`3.14\`
+- **Boolean**, \`True\` or \`False\` (capitalized!)
+- **None**, "nothing here" (Python's version of empty)
 
 Curious what's inside a variable? Ask it! Wrap any value in \`type(...)\` and Python tells you its type.`,
     },
@@ -41,13 +41,13 @@ print(type("hello"))
 print(type(3.14))
 print(type(True))
 print(type(None))`,
-      note: "Notice str, int and float are lowercase here but print wrapped in <class '...'> — they're actual things (classes) in Python, which you'll meet properly much later.",
+      note: "Notice str, int and float are lowercase here but print wrapped in <class '...'>. They're actual things (classes) in Python, which you'll meet properly much later.",
     },
     {
       type: "prose",
       md: `Here's where variables earn their keep: **reusing and changing** values. You can do math with them, swap them around, and build new values from old ones.
 
-Also notice what happens when you print \`None\` — it literally prints \`None\`, because that's the value: "nothing to see".`,
+Also notice what happens when you print \`None\`: it literally prints \`None\`, because that's the value: "nothing to see".`,
     },
     {
       type: "example",
@@ -70,14 +70,14 @@ print(fruit)`,
 - Names can't start with a number.
 - Make names descriptive. \`score\` beats \`s\` every time.
 
-This style is called \`snake_case\` — and Python loves it so much it's literally named after Monty Python's preference for silly, readable names.`,
+This style is called \`snake_case\`, a style Python loves so much it's literally named after Monty Python's preference for silly, readable names.`,
     },
     {
       type: "exercise",
       id: "vars-1",
       title: "Make the boxes",
       prompt:
-        'Create two variables: `city` holding the name of a city you\'d love to visit (as a string), and `year` holding the year you\'ll go (a whole number). Then print them on two separate lines:\n\n```\nKyoto\n2027\n```\n\n(Any city and year count — what matters is that both values live in variables.)',
+        'Create two variables: `city` holding the name of a city you\'d love to visit (as a string), and `year` holding the year you\'ll go (a whole number). Then print them on two separate lines:\n\n```\nKyoto\n2027\n```\n\n(Any city and year count. What matters is that both values live in variables.)',
       starter: `# Create city and year, then print both
 `,
       check: {
@@ -125,7 +125,7 @@ print(type(mystery_three))`,
       id: "vars-3",
       title: "The swap",
       prompt:
-        "Swap the values of `left_hand` and `right_hand`, then print both lines:\n\n```\nLeft holds: ring\nRight holds: coin\n```\n\n(Python actually has a one-line swap trick — try the temporary-variable way first, then ask a search engine about 'python tuple swap' if you're curious.)",
+        "Swap the values of `left_hand` and `right_hand`, then print both lines:\n\n```\nLeft holds: ring\nRight holds: coin\n```\n\n(Python actually has a one-line swap trick. Try the temporary-variable way first, then ask a search engine about 'python tuple swap' if you're curious.)",
       starter: `left_hand = "coin"
 right_hand = "ring"
 
@@ -153,7 +153,7 @@ print(f"Right holds: {right_hand}")`,
     },
     {
       type: "prose",
-      md: `You now know how programs remember things. Coming up: strings get the spotlight — including f-strings, the magic that makes mixing text and variables painless.`,
+      md: `You now know how programs remember things. Coming up: strings get the spotlight, including f-strings, the magic that makes mixing text and variables painless.`,
     },
   ],
 };

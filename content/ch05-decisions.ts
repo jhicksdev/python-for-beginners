@@ -17,7 +17,7 @@ if temperature > 30:
     print("It's hot!")
 \`\`\`
 
-Two pieces of syntax to notice: the condition ends with a **colon**, and the indented lines below it run **only when the condition is true**. That indentation isn't decoration — it's how Python knows which lines belong inside the \`if\`.
+Two pieces of syntax to notice: the condition ends with a **colon**, and the indented lines below it run **only when the condition is true**. That indentation isn't decoration; it's how Python knows which lines belong inside the \`if\`.
 
 The comparison operators build conditions: \`==\` (equal), \`!=\` (not equal), \`<\`, \`>\`, \`<=\`, \`>=\`.`,
     },
@@ -38,9 +38,9 @@ else:
       type: "prose",
       md: `Conditions can combine. Python spells its logic words out:
 
-- \`and\` — both sides must be true
-- \`or\` — at least one side must be true
-- \`not\` — flips truth upside down
+- \`and\`: both sides must be true
+- \`or\`: at least one side must be true
+- \`not\`: flips truth upside down
 
 No cryptic symbols required: \`if age >= 18 and has_ticket:\` reads like the sentence it is.`,
     },
@@ -58,11 +58,11 @@ if age < 13 or age >= 65:
 
 if not has_ticket:
     print("You need a ticket!")`,
-      note: "Read and as 'and also', or as 'or else'. The last block stays silent because has_ticket is True — exactly the point.",
+      note: "Read and as 'and also', or as 'or else'. The last block stays silent because has_ticket is True. Exactly the point.",
     },
     {
       type: "prose",
-      md: `One subtlety worth knowing early: in Python the values \`False\`, \`None\`, \`0\`, and empty things like \`""\` all count as *falsy* — everything else is truthy. So an empty string fails an \`if\`, which turns out to be very convenient.`,
+      md: `One subtlety worth knowing early: in Python the values \`False\`, \`None\`, \`0\`, and empty things like \`""\` all count as *falsy*. Everything else is truthy. So an empty string fails an \`if\`, which turns out to be very convenient.`,
     },
     {
       type: "exercise",
@@ -76,7 +76,7 @@ on_list = True
 # One condition, two possible messages
 `,
       check: { kind: "output", expect: "Welcome in" },
-      hint: "Both requirements must hold together — that's a job for and.",
+      hint: "Both requirements must hold together; that's a job for and.",
       solution: `age = 23
 on_list = True
 
@@ -90,7 +90,7 @@ else:
       id: "decisions-2",
       title: "Grade assigner",
       prompt:
-        'Given `score = 84`, print the letter grade: `A` for 90+, `B` for 80–89, `C` for 70–79, `D` for 60–69, `F` below that. Format:\n\n```\nScore 84 earns a B\n```\n\nAfter checking passes, try changing score to 95 and 12 to see each path work.',
+        'Given `score = 84`, print the letter grade: `A` for 90+, `B` for 80-89, `C` for 70-79, `D` for 60-69, `F` below that. Format:\n\n```\nScore 84 earns a B\n```\n\nAfter checking passes, try changing score to 95 and 12 to see each path work.',
       starter: `score = 84
 
 # if / elif / elif / elif / else ...
@@ -139,7 +139,7 @@ else:
     },
     {
       type: "prose",
-      md: `Decisions let your program pick a path. But what about doing something a hundred times in a row? That needs loops — next chapter.`,
+      md: `Decisions let your program pick a path. But what about doing something a hundred times in a row? That needs loops, next chapter.`,
     },
   ],
 };

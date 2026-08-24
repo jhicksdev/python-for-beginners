@@ -30,15 +30,15 @@ print(character["lives"])
 
 print(len(character))
 print(character.keys())`,
-      note: "len() counts PAIRS (3). .keys() shows what labels exist — and dicts remember the order you put them in.",
+      note: "len() counts PAIRS (3). .keys() shows what labels exist; dicts remember the order you put them in.",
     },
     {
       type: "prose",
       md: `Working with dictionaries:
 
-- Read with \`d[key]\` — but a **missing key raises an error** (a \`KeyError\`), unlike some languages that quietly hand back nothing.
-- Safer reads use \`.get(key)\`, which gives back \`None\` instead of exploding — or \`.get(key, fallback)\` to choose your own default.
-- Write with \`d[key] = value\` — this adds or overwrites.
+- Read with \`d[key]\`, but a **missing key raises an error** (a \`KeyError\`), unlike some languages that quietly hand back nothing.
+- Safer reads use \`.get(key)\`, which gives back \`None\` instead of exploding, or \`.get(key, fallback)\` to choose your own default.
+- Write with \`d[key] = value\`; this adds or overwrites.
 - \`key in d\` asks whether a key exists.
 - Looping hands you each **pair**:`,
     },
@@ -61,9 +61,9 @@ for item, count in inventory.items():
     },
     {
       type: "prose",
-      md: `Dictionaries can hold *anything* as values — including lists, numbers, even other dictionaries. That's how real programs describe rich things like users, songs, or game characters.
+      md: `Dictionaries can hold *anything* as values, including lists, numbers, even other dictionaries. That's how real programs describe rich things like users, songs, or game characters.
 
-One more treat: \`.get("key", fallback)\` in action — read a key but supply a default when it's missing:`,
+One more treat: \`.get("key", fallback)\` in action: read a key but supply a default when it's missing:`,
     },
     {
       type: "example",
@@ -115,7 +115,7 @@ print(f"Based in {person['city']}")`,
 # give Mira +15, then loop and print "Name: score"
 `,
       check: { kind: "output", expect: "Mira: 40\nJuno: 33\nSol: 21" },
-      hint: 'scores["mira"] += 15 updates one player. The items() loop gives name, points — capitalize() tidies the display name.',
+      hint: 'scores["mira"] += 15 updates one player. The items() loop gives name, points; capitalize() tidies the display name.',
       solution: `scores = {"mira": 25, "juno": 33, "sol": 21}
 
 scores["mira"] += 15
@@ -147,13 +147,13 @@ for word in words:
 for word, count in counts.items():
     print(f"{word}: {count}")`,
       successMessage:
-        "You just built a frequency counter — the heart of word clouds, analytics, and spam filters.",
+        "You just built a frequency counter, the heart of word clouds, analytics, and spam filters.",
     },
     {
       type: "prose",
       md: `You now hold both great collections: lists for ordered data, dictionaries for labelled data.
 
-But here's the question good programmers always ask: *can I wrap this pattern up and reuse it?* That's functions — next chapter.`,
+But here's the question good programmers always ask: *can I wrap this pattern up and reuse it?* That's functions, next chapter.`,
     },
   ],
 };

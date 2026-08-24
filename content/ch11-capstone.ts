@@ -8,19 +8,19 @@ const chapter: Chapter = {
   blocks: [
     {
       type: "prose",
-      md: `Time to prove what you know. In this chapter you'll build a small virtual pet — **one piece at a time**, each part leaning on an earlier chapter:
+      md: `Time to prove what you know. In this chapter you'll build a small virtual pet, **one piece at a time**, each part leaning on an earlier chapter:
 
 - classes and instance state *(chapter 10)*
 - functions and defaults *(chapter 9)*
 - decisions *(chapter 5)*
-- loops and collections *(chapters 6–8)*
+- loops and collections *(chapters 6-8)*
 - f-strings everywhere
 
 Read each task carefully. Build the smallest thing that works, run it, then extend. That rhythm *is* professional programming.`,
     },
     {
       type: "prose",
-      md: `### Part 1 — The pet exists
+      md: `### Part 1: The pet exists
 
 Create a class \`EnergyPet\`:
 
@@ -103,14 +103,14 @@ print(pixel.status())`,
     },
     {
       type: "prose",
-      md: `### Part 2 — Rules keep pets alive
+      md: `### Part 2: Rules keep pets alive
 
 Right now energy could go negative or sky-high. Real programs enforce boundaries:
 
 - energy must stay between **0 and 10** no matter what
 - add a \`happy()\` method returning \`True\` when energy is **7 or more**
 
-Update \`play\`/\`feed\` to clamp after changing energy. Python gives you two handy built-ins: \`max(0, x)\` never goes below zero, and \`min(10, x)\` never exceeds ten — chain them.`,
+Update \`play\`/\`feed\` to clamp after changing energy. Python gives you two handy built-ins: \`max(0, x)\` never goes below zero, and \`min(10, x)\` never exceeds ten; chain them.`,
     },
     {
       type: "exercise",
@@ -180,12 +180,12 @@ print(zoomies.happy())`,
     },
     {
       type: "prose",
-      md: `### Part 3 — A day in the life
+      md: `### Part 3: A day in the life
 
 Now combine everything into one function. Define a standalone function \`simulate_day(pet)\` that:
 
 1. takes a list of events, like \`["play", "feed", "play", "nap"]\`
-2. applies each event to the pet — **naps add 1 energy**
+2. applies each event to the pet, where **naps add 1 energy**
 3. collects a log line per event: \`"played (-2)"\`, \`"fed (+2)"\`, \`"napped (+1)"\`, or \`"huh? (0)"\` for anything else
 4. returns the list of log lines`,
     },
@@ -248,7 +248,7 @@ print(pet.status())`,
     },
     {
       type: "prose",
-      md: `Hmm — notice something awkward in that solution? The event logic ended up *outside* \`simulate_day\`, which defeats the point of defining it. Classic moment in real development: spot the design smell, refactor.
+      md: `Hmm, notice something awkward in that solution? The event logic ended up *outside* \`simulate_day\`, which defeats the point of defining it. Classic moment in real development: spot the design smell, refactor.
 
 **Better:** pass the events INTO the function and let \`simulate_day\` own the whole job:`,
     },
@@ -272,14 +272,14 @@ print(pet.status())`,
             log.append("huh? (0)")
 
     return log`,
-      note: "The function now takes a pet plus a plan — reusable with ANY pet and ANY day.",
+      note: "The function now takes a pet plus a plan, reusable with ANY pet and ANY day.",
     },
     {
       type: "exercise",
       id: "capstone-4",
       title: "Part 4: The full simulator",
       prompt:
-        "Rewrite `simulate_day(pet, events)` properly (events passed in, logic inside). Then run TWO days and print everything:\n\nDay one for Pixel: `[\"play\", \"feed\", \"flying\", \"nap\"]` — print its log joined by `, `.\nDay two for Pixel: `[\"nap\", \"nap\", \"play\"]` — same format.\nFinish with Pixel's final status.",
+        "Rewrite `simulate_day(pet, events)` properly (events passed in, logic inside). Then run TWO days and print everything:\n\nDay one for Pixel: `[\"play\", \"feed\", \"flying\", \"nap\"]`, print its log joined by `, `.\nDay two for Pixel: `[\"nap\", \"nap\", \"play\"]`, print its log the same way.\nFinish with Pixel's final status.",
       starter: `class EnergyPet:
     # your Part 2 class
     pass
@@ -299,7 +299,7 @@ day_two = ["nap", "nap", "play"]
         expect:
           "played (-2), fed (+2), huh? (0), napped (+1)\nnapped (+1), napped (+1), played (-2)\nPixel the pet has 6 energy",
       },
-      hint: 'Two calls: print(", ".join(simulate_day(pixel, day_one))) etc. Track the math by hand first — 5 → play 3 → feed 5 → huh 5 → nap 6 → then naps push to 8 → play lands on 6.',
+      hint: 'Two calls: print(", ".join(simulate_day(pixel, day_one))) etc. Track the math by hand first: 5, then play to 3, feed to 5, huh stays 5, nap to 6, then naps push to 8, play lands on 6.',
       solution: `class EnergyPet:
     def __init__(self, name):
         self.name = name
@@ -355,12 +355,12 @@ Take a breath and look back: eleven chapters ago, printing one line felt novel. 
 **Where to go next:**
 
 - Install real Python locally (\`python --version\`) and run your files from the terminal.
-- Read *Automate the Boring Stuff with Python* (free online) or the official tutorial at python.org — both famously friendly.
+- Read *Automate the Boring Stuff with Python* (free online) or the official tutorial at python.org, both famously friendly.
 - Try building tiny CLI tools: a quiz game, a budget tracker, a text adventure.
 - When you're ready for the web: Flask first (tiny), Django later (huge).
 - Curious about data? The \`pandas\` library turns everything you learned here into superpowers.
 
-Happy hacking — and remember: \`print("Hello!")\` is always one line away.`,
+Happy hacking, and remember: \`print("Hello!")\` is always one line away.`,
     },
   ],
 };

@@ -14,12 +14,12 @@
 </script>
 
 {#if running}
-  <div class="panel running" role="status">
+  <div class="panel running" role="status" aria-live="polite">
     <span class="spinner" aria-hidden="true"></span>
-    {warming ? "Warming up Python — this happens once…" : "Running…"}
+    {warming ? "Warming up Python. This happens once." : "Running."}
   </div>
 {:else if result}
-  <div class="panel" class:error={!result.ok && !result.timedOut} class:timeout={result.timedOut}>
+  <div class="panel" role="status" aria-live="polite" class:error={!result.ok && !result.timedOut} class:timeout={result.timedOut}>
     {#if result.output.trim().length > 0}
       <pre class="output">{result.output}</pre>
     {:else if result.ok}
@@ -74,7 +74,7 @@
     padding: 12px 16px;
     font-family: var(--font-mono);
     font-size: 13px;
-    animation: reveal 180ms ease;
+    animation: reveal 180ms var(--ease-out);
   }
   @keyframes reveal {
     from { opacity: 0; transform: translateY(-2px); }
@@ -98,8 +98,8 @@
     to { transform: rotate(360deg); }
   }
   .panel.error {
-    border-top-color: color-mix(in srgb, var(--accent) 35%, var(--code-border));
-    background: color-mix(in srgb, var(--accent-tint) 40%, var(--code-bg));
+    border-top-color: color-mix(in srgb, var(--error) 35%, var(--code-border));
+    background: color-mix(in srgb, var(--error-tint) 40%, var(--code-bg));
   }
   .panel.timeout {
     border-top-color: color-mix(in srgb, var(--amber) 45%, var(--code-border));
@@ -116,7 +116,7 @@
   .error-msg {
     margin: 8px 0 0;
     white-space: pre-wrap;
-    color: var(--accent-deep);
+    color: var(--error);
   }
   .expected {
     margin-top: 12px;
@@ -141,7 +141,7 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .checks li {
     display: flex;
@@ -149,7 +149,7 @@
     gap: 8px;
   }
   .checks li.pass .glyph { color: var(--green); }
-  .checks li.fail .glyph { color: var(--accent-deep); }
+  .checks li.fail .glyph { color: var(--error); }
   .check-name { color: var(--ink); }
   .detail { color: var(--ink-3); }
   .detail.err { color: var(--ink-2); }

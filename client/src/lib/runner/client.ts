@@ -76,7 +76,7 @@ class WorkerRunner {
           output: "",
           timedOut: true,
           error:
-            "Your code ran for too long — is there a loop that never ends? The playground was reset.",
+            "Your code ran for too long. Is there a loop that never ends? The playground was reset.",
         });
       }, timeoutMs);
       this.pending.set(id, { resolve, timer });

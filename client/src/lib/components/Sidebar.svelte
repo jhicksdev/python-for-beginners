@@ -63,8 +63,8 @@
   }
   ol {
     list-style: none;
-    margin: 14px 0;
-    padding: 0 10px;
+    margin: 0;
+    padding: 0 14px;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -76,8 +76,8 @@
     text-decoration: none;
     color: var(--ink);
     padding: 8px 10px;
-    border-radius: var(--radius-sm);
-    border-left: 2px solid transparent;
+    border-radius: 0;
+    border-inline-start: 2px solid transparent;
     transition: background var(--speed) ease, border-color var(--speed) ease;
   }
   a:hover {
@@ -86,6 +86,7 @@
   a.current {
     background: var(--accent-tint);
     border-left-color: var(--accent);
+    box-shadow: 3px 0 0 var(--accent) inset;
   }
   a.current .title {
     color: var(--accent-deep);

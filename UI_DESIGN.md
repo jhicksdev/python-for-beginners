@@ -1,101 +1,139 @@
 # Python Tutorial UI Design
 
-## Design Philosophy
+## Current Direction
 
-This design rejects templated AI defaults in favor of a visual identity grounded in Python's own world: **the `>>>` prompt, the code cell, and the REPL**. The interface makes deliberate, opinionated choices that feel specific to Python's philosophy — *readability counts*, playfulness welcome (Monty Python is in the name) — not a generic warm-cream tutorial.
+The interface is an editorial workbench for beginners learning by running
+small pieces of Python. It should feel like a focused reading and practice
+space, not a generic SaaS dashboard. The visual reference is Python's textual
+world: the REPL, the code cell, indentation, and a printed index.
 
-The signature is the **prompt chevrons + code cell + `>>>` watermark** — Python's vernacular made tactile. The accent is azure blue (`--accent: #1D63B8`) — interpreter-blue, not default-framework blue, and appears strategically at interaction moments. The hero is a thesis: a live REPL you can run before you read a word.
+The redesign keeps the useful Python-specific details but removes their
+decorative repetition. `>>>` is reserved for the brand and code context. Cells
+are completion markers, not a general-purpose icon. Arrows are used only when
+they clarify movement through the lesson. Status and actions are deliberately
+different from one another.
 
-## Color Token System (6 named hex values)
+## Design Principles
 
-| Token | Light | Dark | Role |
-|-------|-------|------|------|
-| `--bg` | `#FFFBF2` | `#12141A` | Washi paper (peach-warm) / deep ink-black |
-| `--ink` | `#1F1A1C` | `#EDF2FC` | Warm near-black; not pure black |
-| `--accent` | `#1D63B8` | `#7CB7EE` | Azure blue — deep water, not tailwind #3B82F6 |
-| `--accent-tint` | `#E1EDFB` | `#14212F` | Current row, cell glow, focus wash |
-| `--border` | `#E7D8C4` | `#272B35` | Washi edge |
-| `--ink-3` | `#958A86` | `#8B93A4` | Secondary, gutters, dividers |
+- Make the lesson content the strongest visual element.
+- Use one clear accent for focus, primary actions, and completion.
+- Prefer rules, whitespace, and typography over nested cards and shadows.
+- Keep the live editor visible and runnable without fake browser or IDE chrome.
+- Make errors specific and calm; do not use the accent color for failures.
+- Never invent metrics, testimonials, or product claims.
+- Keep all color, font, radius, and motion values in named tokens.
 
-Additional: `--surface: #FFFFFF / #191C24`, `--surface-2: #F3EAE0 / #20232C`, `--green: #0F766E / #34D399` (solved), `--code-bg: #FFF8F0 / #16181F`. Code blocks carry a faint `>>>` watermark (opacity 0.14–0.18) rather than a flat fill.
+## Token System
 
-### Accent Usage Map
+The source of truth is `client/src/tokens.css`. The root `tokens.css` file
+imports it as a portable entrypoint. `client/src/app.css` maps the token names
+to semantic variables used by the components.
 
-- **Focus outlines** (`:focus-visible`) — azure, single intentional place
-- **Primary CTA + REPL Run** — pill buttons with soft shadow, not square
-- **Current chapter in Sidebar** (`a.current`) — tint + azure left border + cell glow (`box-shadow: 0 0 0 4px var(--accent-tint)`)
-- **Cell** (`.cell.on`, `.facet.on`) — filled azure when chapter/exercise complete
-- **NOT used**: sidebar hover, neutral borders, code chrome (these stay washi/gray)
+| Token group | Role |
+| --- | --- |
+| `--color-paper`, `--color-paper-2`, `--color-paper-3` | Warm reading surfaces and code-adjacent surfaces |
+| `--color-ink`, `--color-ink-2`, `--color-ink-3` | Primary, secondary, and muted text |
+| `--color-accent`, `--color-accent-deep`, `--color-accent-tint` | Interpreter blue for focus and meaningful interaction |
+| `--color-positive`, `--color-positive-tint` | Solved exercises and successful runs |
+| `--color-warning`, `--color-warning-tint` | Hints and timeouts |
+| `--color-error`, `--color-error-tint` | Tracebacks and failed checks |
+| `--color-code` and `--color-rule*` | Editors, output, and separators |
 
-## Type Scale
+The theme is controlled by `:root[data-theme="dark"]`. Components must use
+semantic variables such as `var(--bg)`, `var(--ink)`, and `var(--accent)`
+instead of inline hex, RGB, or OKLCH values.
 
-| Role | Font | Notes |
-|------|------|-------|
-| **Display** | `Fraunces Variable` opsz 32, 650–700, `letter-spacing: -0.028` to `-0.032` | Used with restraint: hero + chapter H1 only. Italic on `one small win` for emphasis. |
-| **Body** | `Space Grotesk` 400/500/700, tracking -0.01em, 16px/1.65 | Geometric humanist, playful + technical; replaces generic Inter. More distinctive, matching Python's friendly-but-serious character. |
-| **Mono** | `IBM Plex Mono` 400/500 | Code, prompts, numbers, pills, captions. `11–13px`, uppercase pills at `0.06–0.14em` tracking. |
+## Typography
 
-## Layout & Structure
+| Role | Font | Use |
+| --- | --- | --- |
+| Display | Fraunces Variable | Home and chapter headings only; always roman, never italic |
+| Body | Space Grotesk | Lesson copy, navigation, and controls |
+| Mono | IBM Plex Mono | Code, progress values, labels, keyboard hints, and prompts |
 
-### Signature Treatment: Prompt Chevrons + Cell + `>>>` Watermark
+Headings wrap safely on small screens with `overflow-wrap: anywhere` and
+`min-width: 0` where they sit in flex or grid layouts. Body copy stays readable
+with a narrow measure on chapter pages.
 
-- **Prompt mark**: `>>>` set in IBM Plex Mono bold, accent-colored — the brand glyph in the header and hero comment tag. Not an image.
-- **Cell**: small rounded square (`.cell`, `.facet`) — the "block of code" made physical. Used in Sidebar, hero meta, Chapter head, Exercise header. Glows with `box-shadow: 0 0 0 4px var(--accent-tint)` when complete.
-- **Arrow**: `->` appears as watermark in hero REPL (`96px Fraunces italic, 0.06 opacity`) and as `arrow-divider` (`— -> —` with 1px rules) between exercise → prose transitions. Every editor frame carries a faux prompt `>>>` (`position: absolute; right:10px; bottom:6px`).
-- **Hero thesis**: Two-column (`1.05fr / 0.95fr`) above 900px, stacked below. Left: headline/lede/CTA/meta pills. Right: live REPL card with traffic-light dots, `python — 3.14` chrome, editable CodeMirror + Run → output. Most characteristic thing in Python's world (the interactive interpreter) is the first thing you see.
+## Page Structure
 
-### Content Flow
+### Shell
 
-- **Home**: Max-width 1080px. Hero with live demo (thesis). Below: `the path` eyebrow + rule + chapter lattice — bordered card list with `36px` number / `14px` cell / title / tagline / pill count / `→` hover. Cell turns azure when chapter complete.
-- **Chapter pages**: Head with `cell + # chapter 02 — 3 exercises`, H1 in Fraunces 700/42px, tagline. Blocks: prose → example (with `->` divider) → exercise. Pager at bottom is pill-bordered with hover tint + lift.
-- **Exercise**: Card with bordered header, cell, `pill ✓ solved` in green, editor-frame with `>>>` watermark, pill primary (`999px`) + secondary outline pills.
+`App.svelte` owns the persistent header, responsive chapter sidebar, skip link,
+and main content region. The sidebar is a numbered index with a single current
+chapter treatment. On narrow screens it becomes a slide-in panel with a scrim.
 
-## Motion & Interaction
+### Home
 
-- **Subtle only**: `160ms ease` on color/border/transform; `400ms cubic-bezier(0.22,1,0.36,1)` on progress fill.
-- **Success pop**: `220ms` translate + fade on `.success`.
-- **Cell glow**: `box-shadow` spread when `.on` (no scale) — quiet discipline.
-- **Reduced motion**: single `prefers-reduced-motion` block kills all anims.
-- **No scroll reveals** or ambient particles — one orchestrated moment (hero REPL) lands harder than scattered effects.
+`Home.svelte` uses a two-part workbench layout:
 
-## Written Copy Decisions
+1. A short thesis, one primary start/resume action, and a live Python editor.
+2. A numbered chapter index with completion counts.
 
-- **Home headline**: `Learn Python, one small win at a time.` — `one small win` italic + azure, emphasizes incremental progress.
-- **Hero lede**: `Real Python runs right in your browser — no setup, no installs.` — what the person controls.
-- **Hero REPL**: `print("Hello, Python!")` starter + hint `Try changing the name.` — invites play in 2 seconds.
-- **Chapter tagline**: e.g. `Say hello and make your computer talk back` — plain, active.
-- **Errors**: `Fix the error above and run again.` — direct, no apology.
-- **Success**: `Solved. That one's in the books.` — conversational, consistent.
+The editor is real CodeMirror and has no simulated window controls. The offset
+paper shadow is the only decorative depth treatment on the hero editor.
 
-## Why These Choices
+### Chapter
 
-- Python's world is textual and interactive: the `>>>` prompt, indented blocks, the REPL loop — not abstract shapes. The design pulls from those instruments.
-- Interpreter blue `#1D63B8` instead of framework blue or Ruby red; washi paper `#FFFBF2` keeps the tutorial warm while the accent stays cool and precise.
-- Fraunces' soft serifs match Python's approachability; Space Grotesk's tight geometry matches the interpreter's precision.
+`ChapterView.svelte` keeps a narrow reading column. Prose, runnable examples,
+and exercises follow the order authored in `content/`. Navigation at the bottom
+uses simple bordered links rather than large promotional cards.
 
-**The aesthetic risk**: **putting a live, runnable Python REPL in the hero** above the fold. Risk: heavier hero, competes with headline, could fail if wasm loads slowly, pushes chapter list down. Justification: for a language tutorial, the most honest thesis is not words about Python but Python itself responding to you. It turns the page from brochure into instrument — and failure is graceful (shows `(no output — try a print)` / warming state).
+### Exercise
 
-## Token Reference
+`ExerciseCard.svelte` makes the prompt, editor, primary run/check action, and
+feedback the hierarchy. Hints and solutions are secondary disclosures. Solved
+state uses the positive token; method requirements remain visible so technique
+enforcement is transparent.
 
-```css
-/* Light */
---bg: #FFFBF2;
---ink: #1F1A1C;
---accent: #1D63B8;
---accent-deep: #164C87;
---accent-tint: #E1EDFB;
---border: #E7D8C4;
---surface: #FFFFFF;
---surface-2: #F3EAE0;
---font-display: "Fraunces Variable", Georgia, serif;
---font-body: "Space Grotesk", system-ui, sans-serif;
---font-mono: "IBM Plex Mono", ui-monospace, monospace;
+## Interaction
 
-/* Dark */
---bg: #12141A;
---ink: #EDF2FC;
---accent: #7CB7EE;
---accent-deep: #A6CCF4;
---accent-tint: #14212F;
---border: #272B35;
+- Use `--speed` and `--ease-out` for color, border, and small position changes.
+- Progress fill may use the longer easing already defined in the component.
+- Keep motion subtle: no scroll reveals, particles, or ambient animation.
+- Provide `:focus-visible` outlines for every keyboard-interactive control.
+- Every runner state needs a clear loading, success, error, or timeout message.
+- Respect `prefers-reduced-motion` through the global rule in `app.css`.
+
+## Responsive Rules
+
+The layout must work at 320, 375, 414, and 768 pixels without horizontal
+scrolling. Keep `overflow-x: clip` on both `html` and `body`. On small screens:
+
+- Collapse the home hero to one column.
+- Collapse section heads to one column.
+- Keep buttons and navigation labels on one line.
+- Hide descriptive chapter taglines only where necessary to preserve the index.
+- Keep image-bearing or content-bearing grid tracks on `minmax(0, 1fr)`.
+- Allow long display headings to wrap rather than overflow.
+
+## Content and Runtime Constraints
+
+The client imports chapter content at build time. Python execution happens in a
+Web Worker through Pyodide; it never runs on the server. Do not add API fetches
+to the deployed client or put learner execution on the server.
+
+Exercise checks must evaluate to exactly `True`. Technique requirements are
+enforced from real AST call nodes, so comments and strings do not satisfy
+`mustUseMethods` or `mustUseFunctions`.
+
+## Validation
+
+After UI changes, run:
+
+```sh
+bun run check
+bun run lint
+bun run build
 ```
+
+After content or runner changes, also run:
+
+```sh
+bun client/scripts/verify-content.ts
+bun client/scripts/smoke.ts
+```
+
+The project keeps Hallmark run memory in `.hallmark/log.json`. Future redesigns
+should preserve this workbench direction while varying structure only when the
+information architecture supports it.

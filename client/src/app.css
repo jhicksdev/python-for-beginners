@@ -1,81 +1,47 @@
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5
+ * Hallmark · genre: editorial · macrostructure: Workbench · theme: Almanac · enrichment: none · nav: N6 · footer: Ft1
+ * Redesign: quieter editorial workbench; audience: beginners · use: learn by running code · tone: technical and warm
+ */
+@import "../../tokens.css";
+
 :root {
-  --bg: #FFFBF2;
-  --surface: #FFFFFF;
-  --surface-2: #F3EAE0;
-  --border: #E7D8C4;
-  --border-strong: #C9B7A3;
-
-  --ink: #1F1A1C;
-  --ink-2: #5B5351;
-  --ink-3: #958A86;
-
-  --accent: #1D63B8;
-  --accent-deep: #164C87;
-  --accent-tint: #E1EDFB;
-
-  --green: #0F766E;
-  --green-tint: #ECFDF5;
-  --amber: #92400E;
-  --amber-tint: #FFFBEB;
-
-  --code-bg: #FFF8F0;
-  --code-border: #E7D8C4;
-
-  --tok-keyword: #1D63B8;
-  --tok-string: #0F766E;
-  --tok-number: #9A3412;
-  --tok-constant: #6D28D9;
-  --tok-comment: #A69E9A;
-  --tok-method: #A16207;
-  --tok-punct: #78716C;
-  --tok-variable: #1F1A1C;
-
-  --font-display: "Fraunces Variable", Georgia, serif;
-  --font-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  --header-h: 56px;
-  --sidebar-w: 292px;
-  --radius: 14px;
-  --radius-sm: 9px;
+  --bg: var(--color-paper);
+  --surface: var(--color-paper-2);
+  --surface-2: var(--color-paper-3);
+  --border: var(--color-rule);
+  --border-strong: var(--color-rule-strong);
+  --ink: var(--color-ink);
+  --ink-2: var(--color-ink-2);
+  --ink-3: var(--color-ink-3);
+  --accent: var(--color-accent);
+  --accent-deep: var(--color-accent-deep);
+  --accent-tint: var(--color-accent-tint);
+  --green: var(--color-positive);
+  --green-tint: var(--color-positive-tint);
+  --amber: var(--color-warning);
+  --amber-tint: var(--color-warning-tint);
+  --error: var(--color-error);
+  --error-tint: var(--color-error-tint);
+  --on-accent: var(--color-on-accent);
+  --code-bg: var(--color-code);
+  --code-border: var(--color-rule);
+  --tok-keyword: var(--color-accent);
+  --tok-string: var(--color-positive);
+  --tok-number: var(--color-token-number);
+  --tok-constant: var(--color-token-constant);
+  --tok-comment: var(--color-ink-3);
+  --tok-method: var(--color-warning);
+  --tok-punct: var(--color-ink-2);
+  --tok-variable: var(--color-ink);
+  --header-h: 64px;
+  --sidebar-w: 280px;
+  --radius: 4px;
+  --radius-sm: 3px;
   --speed: 160ms;
 }
 
-:root[data-theme="dark"] {
-  --bg: #12141A;
-  --surface: #191C24;
-  --surface-2: #20232C;
-  --border: #272B35;
-  --border-strong: #3A3F4C;
-
-  --ink: #EDF2FC;
-  --ink-2: #C3CBDA;
-  --ink-3: #8B93A4;
-
-  --accent: #7CB7EE;
-  --accent-deep: #A6CCF4;
-  --accent-tint: #14212F;
-
-  --green: #34D399;
-  --green-tint: #0B1E19;
-  --amber: #FBBF24;
-  --amber-tint: #211A0E;
-
-  --code-bg: #16181F;
-  --code-border: #272B35;
-
-  --tok-keyword: #7CB7EE;
-  --tok-string: #6EE7B7;
-  --tok-number: #FDBA74;
-  --tok-constant: #C4B5FD;
-  --tok-comment: #80889B;
-  --tok-method: #FBBF24;
-  --tok-punct: #A8A29E;
-  --tok-variable: #EDF2FC;
-}
-
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--bg);
@@ -83,10 +49,10 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color var(--speed) ease, color var(--speed) ease;
+  transition: background-color var(--speed) var(--ease-out), color var(--speed) var(--ease-out);
 }
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -94,7 +60,7 @@ body {
   border-radius: 4px;
 }
 ::selection { background: var(--accent-tint); }
-.cm-cursor-dark { caret-color: #FFFFFF; }
+.cm-cursor-dark { caret-color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

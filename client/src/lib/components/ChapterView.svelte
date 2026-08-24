@@ -50,7 +50,7 @@
 
 {#if error}
   <div class="error-state">
-    <span class="comment-tag"># oops</span>
+    <span class="comment-tag">oops</span>
     <p>{error}</p>
     <button type="button" onclick={() => load(slug)}>Try again</button>
   </div>
@@ -61,7 +61,7 @@
     <header class="chapter-head">
       <div class="chapter-meta">
         <span class="cell" aria-hidden="true"></span>
-        <span class="comment-tag big"># chapter {paddedNumber} — {chapter.blocks.filter(b=>b.type==="exercise").length} exercises</span>
+        <span class="comment-tag big"># chapter {paddedNumber} with {chapter.blocks.filter(b=>b.type==="exercise").length} exercises</span>
       </div>
       <h1>{chapter.title}</h1>
       <p class="tagline">{chapter.tagline}</p>
@@ -110,7 +110,7 @@
         </a>
       {:else}
         <div class="finale">
-          <span class="comment-tag"># the end</span>
+        <span class="comment-tag">the end</span>
           <p>You've reached the last chapter. Go build something!</p>
         </div>
       {/if}
@@ -126,9 +126,9 @@
     width: 100%;
   }
   .chapter-head {
-    margin: 36px 0 18px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--border);
+    margin: 48px 0 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-strong);
   }
   .chapter-meta {
     display: flex;
@@ -139,7 +139,7 @@
   .cell {
     width: 10px; height: 10px;
     background: var(--accent);
-    border-radius: 3px;
+    border-radius: 1px;
     box-shadow: 0 0 0 4px var(--accent-tint);
   }
   h1 {
@@ -219,11 +219,11 @@
   .pager a {
     text-decoration: none;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 0;
     padding: 14px 18px;
     min-width: 180px;
     transition: border-color var(--speed) ease, background var(--speed) ease, transform var(--speed) ease;
-    background: var(--surface);
+    background: transparent;
   }
   .pager a span {
     display: block;
@@ -241,7 +241,7 @@
   .pager a:hover {
     border-color: var(--accent);
     background: var(--accent-tint);
-    transform: translateY(-1px);
+    transform: translateX(3px);
   }
   .pager a.next { text-align: right; margin-left: auto; }
   .finale {

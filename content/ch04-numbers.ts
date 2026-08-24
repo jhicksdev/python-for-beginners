@@ -12,10 +12,10 @@ const chapter: Chapter = {
 
 \`+\` \`-\` \`*\` do what you think. The interesting ones:
 
-- \`/\` division — with a *surprise* (below)
-- \`//\` floor division — divide and round *down*
-- \`%\` modulo — the remainder after dividing
-- \`**\` exponent — powers of things`,
+- \`/\` division, with a *surprise* (below)
+- \`//\` floor division, divide and round *down*
+- \`%\` modulo, the remainder after dividing
+- \`**\` exponent, powers of things`,
     },
     {
       type: "example",
@@ -25,11 +25,11 @@ print(7 - 3)
 print(7 * 3)
 print(7 % 3)
 print(2 ** 10)`,
-      note: "7 % 3 is 1 because 3 fits into 7 twice (6), leaving a remainder of 1. Modulo is everywhere in real programs — even/odd checks, cycling through options, you name it.",
+      note: "7 % 3 is 1 because 3 fits into 7 twice (6), leaving a remainder of 1. Modulo is everywhere in real programs. Even/odd checks, cycling through options, you name it.",
     },
     {
       type: "prose",
-      md: `Now the surprise — and it's the *opposite* of some other languages. What's \`10 / 3\`?
+      md: `Now the surprise, and it's the *opposite* of some other languages. What's \`10 / 3\`?
 
 In Python, dividing with \`/\` **always gives you a decimal** (a float): \`3.333...\`. Even \`10 / 5\` gives \`2.0\`, not \`2\`.
 
@@ -45,13 +45,13 @@ print(10 // 3)
 pizza = 10
 friends = 3
 print(pizza % friends, "slice(s) left over")`,
-      note: "10 / 5 prints 2.0 — a float! The // operator chops off the decimal part instead.",
+      note: "10 / 5 prints 2.0, a float! The // operator chops off the decimal part instead.",
     },
     {
       type: "prose",
       md: `Normal math precedence rules apply (\`*\` before \`+\`), and parentheses win over everything.
 
-Python also ships a whole toolbox of extra math under the name \`math\`. You unlock it with one line — \`import math\` — and then call things like \`math.ceil(...)\` (always round up) or \`math.floor(...)\` (always round down). Imports are how every Python program reaches beyond the basics; you'll meet them properly later.`,
+Python also ships a whole toolbox of extra math under the name \`math\`. You unlock it with one line, \`import math\`, and then call things like \`math.ceil(...)\` (always round up) or \`math.floor(...)\` (always round down). Imports are how every Python program reaches beyond the basics; you'll meet them properly later.`,
     },
     {
       type: "example",
@@ -77,7 +77,7 @@ hours_per_day = 8
 speed = 82
 
 # daily = speed * hours_per_day
-# days = trip_km split across days, rounded UP — math.ceil will help
+# days = trip_km split across days, rounded UP. math.ceil will help
 `,
       check: { kind: "output", expect: "Daily distance: 656\nDays needed: 2" },
       hint: "math.ceil(trip_km / daily) rounds up any leftover fraction. 940/656 = 1.43… → 2 days.",
@@ -132,7 +132,7 @@ print(f"Even split? {cookies % people == 0}")`,
     },
     {
       type: "prose",
-      md: `Notice what crept in there: comparing things with \`==\` produced \`True\`/\`False\`. That comparison superpower is exactly what the next chapter is about — teaching programs to make decisions.`,
+      md: `Notice what crept in there: comparing things with \`==\` produced \`True\`/\`False\`. That comparison superpower is exactly what the next chapter is about: teaching programs to make decisions.`,
     },
   ],
 };

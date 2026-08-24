@@ -60,7 +60,7 @@
     <span class="pct">{pct}%</span>
   </div>
 
-  <button class="icon-btn has-tooltip" type="button" onclick={doReset} aria-label={confirmingReset ? "Confirm reset — click again to clear all completed exercises" : "Reset progress"} data-tooltip={confirmingReset ? "Click again to confirm — this clears all completed exercises" : "Reset progress"} aria-pressed={confirmingReset}>
+  <button class="icon-btn has-tooltip" type="button" onclick={doReset} aria-label={confirmingReset ? "Confirm reset. Click again to clear all completed exercises" : "Reset progress"} data-tooltip={confirmingReset ? "Click again to confirm. This clears all completed exercises" : "Reset progress"} aria-pressed={confirmingReset}>
     {#if confirmingReset}
       <span class="confirm-text">Confirm reset?</span>
     {:else}
@@ -91,21 +91,14 @@
     z-index: 20;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     height: var(--header-h);
-    padding: 0 18px;
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-strong);
   }
   header::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: -1px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent) 0%, transparent 42%);
-    opacity: 0.14;
-    pointer-events: none;
+    display: none;
   }
   .menu {
     display: none;
@@ -116,9 +109,11 @@
     padding: 6px;
   }
   .brand {
+    position: static;
+    transform: none;
     display: flex;
     align-items: baseline;
-    gap: 9px;
+    gap: 7px;
     text-decoration: none;
     color: var(--ink);
   }
@@ -134,7 +129,7 @@
   .brand-text {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 17px;
+    font-size: 16px;
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
@@ -143,22 +138,22 @@
     display: flex;
     align-items: center;
     gap: 9px;
-    min-width: 120px;
-    max-width: 220px;
+    min-width: 160px;
+    max-width: 260px;
     flex: 1;
   }
   .bar {
     flex: 1;
-    height: 5px;
-    border-radius: 99px;
+    height: 4px;
+    border-radius: 0;
     background: var(--surface-2);
     border: 1px solid var(--border);
     overflow: hidden;
   }
   .fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
-    border-radius: 99px;
+    background: var(--accent);
+    border-radius: 0;
     transition: width 400ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .pct {
@@ -177,11 +172,11 @@
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
-    transition: color var(--speed) ease, background var(--speed) ease, border-color var(--speed) ease;
+    transition: color var(--speed) var(--ease-out), background var(--speed) var(--ease-out), border-color var(--speed) var(--ease-out);
   }
   .icon-btn:hover {
-    color: var(--accent);
-    background: var(--accent-tint);
+    color: var(--ink);
+    background: var(--surface-2);
   }
   .confirm-text {
     font-family: var(--font-mono);
@@ -221,7 +216,7 @@
     overflow-wrap: break-word;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 150ms ease;
+     transition: opacity 150ms var(--ease-out);
     z-index: 30;
   }
   .has-tooltip[data-tooltip]:hover::after {
@@ -231,6 +226,7 @@
     .menu {
       display: inline-flex;
     }
+    .brand { margin-right: auto; }
   }
   @media (max-width: 480px) {
     .brand-text {
